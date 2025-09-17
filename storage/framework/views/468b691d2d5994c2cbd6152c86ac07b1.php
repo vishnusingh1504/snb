@@ -6,10 +6,9 @@
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end d-none d-sm-block">
-                    Design & Develop by Vishnu Bharangar
+                    Design & Develop by Themesbrand
                 </div>
             </div>
         </div>
     </div>
-</footer>
-<?php /**PATH D:\snbic-erp\snb\resources\views/layouts/footer.blade.php ENDPATH**/ ?>
+</footer><?php /**PATH D:\snbic-erp\snb\resources\views/layouts/footer.blade.php ENDPATH**/ ?>

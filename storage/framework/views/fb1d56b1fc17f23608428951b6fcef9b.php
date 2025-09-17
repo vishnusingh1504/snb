@@ -29,11 +29,11 @@
            <!-- App Search-->
            <form class="app-search d-none d-lg-block">
             <div class="position-relative">
-                <input type="text" class="form-control" placeholder="<?php echo app('translator')->get('translation.Search'); ?>">
+                <input type="text" class="form-control" id="searchBox" placeholder="<?php echo app('translator')->get('translation.Search'); ?>">
                 <span class="bx bx-search-alt"></span>
             </div>
         </form>
-
+<!--
         <div class="dropdown dropdown-mega d-none d-lg-block ms-2">
             <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                 <span key="t-megamenu"><?php echo app('translator')->get('translation.Mega_Menu'); ?></span>
@@ -164,6 +164,8 @@
 
             </div>
         </div>
+
+    -->
     </div>
 
     <div class="d-flex">
@@ -469,4 +471,15 @@ unset($__errorArgs, $__bag); ?>" name="password"
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<?php $__env->startSection('script'); ?>
+<script>
+    $(document).on('keydown', function (e) {
+    if (e.ctrlKey && e.code === 'Slash') { // Ctrl + /
+        e.preventDefault(); // Prevent default browser behavior
+        $('#searchBox').focus(); // Focus the search input
+    }
+});
+    </script>
+    <?php $__env->stopSection(); ?>
 <?php /**PATH D:\snbic-erp\snb\resources\views/layouts/topbar.blade.php ENDPATH**/ ?>

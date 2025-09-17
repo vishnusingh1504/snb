@@ -29,11 +29,11 @@
            <!-- App Search-->
            <form class="app-search d-none d-lg-block">
             <div class="position-relative">
-                <input type="text" class="form-control" placeholder="@lang('translation.Search')">
+                <input type="text" class="form-control" id="searchBox" placeholder="@lang('translation.Search')">
                 <span class="bx bx-search-alt"></span>
             </div>
         </form>
-
+<!--
         <div class="dropdown dropdown-mega d-none d-lg-block ms-2">
             <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                 <span key="t-megamenu">@lang('translation.Mega_Menu')</span>
@@ -164,6 +164,8 @@
 
             </div>
         </div>
+
+    -->
     </div>
 
     <div class="d-flex">
@@ -455,3 +457,14 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true">
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+@section('script')
+<script>
+    $(document).on('keydown', function (e) {
+    if (e.ctrlKey && e.code === 'Slash') { // Ctrl + /
+        e.preventDefault(); // Prevent default browser behavior
+        $('#searchBox').focus(); // Focus the search input
+    }
+});
+    </script>
+    @endsection

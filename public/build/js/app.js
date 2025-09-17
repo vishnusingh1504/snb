@@ -319,7 +319,9 @@ File: Main Js File
                 $('#checkAll').prop('checked', false);
             }
         });
+
     }
+
 
     function init() {
         initMetisMenu();
