@@ -10,18 +10,20 @@
                 <li class="menu-title" key="t-menu">@lang('translation.Menu')</li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="{{ route('root') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards">@lang('translation.Dashboards')</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="index" key="t-default">@lang('translation.Default')</a></li>
-                        <li><a href="dashboard-saas" key="t-saas">@lang('translation.Saas')</a></li>
-                        <li><a href="dashboard-crypto" key="t-crypto">@lang('translation.Crypto')</a></li>
-                        <li><a href="dashboard-blog" key="t-blog">@lang('translation.Blog')</a></li>
-                        <li><a href="dashboard-job">@lang('translation.Jobs')</a></li>
-                    </ul>
                 </li>
+
+
+                <li>
+                    <a href="{{ route('master.search-results') }}" class="waves-effect">
+                        <i class="bx bx-search-alt"></i>
+                        <span key="t-search">Search</span>
+                    </a>
+                </li>
+
                 @can('manage users')
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -32,12 +34,24 @@
                             <li><a href="{{ route('roles.index') }}">Roles</a></li>
                             <li><a href="{{ route('users.index') }}">Users</a></li>
                             <li><a href="{{ route('permissions.index') }}">Permissions</a></li>
-                            <li><a href="{{ route('students.index') }}">Students</a></li>
                             <li><a href="{{ route('teachers.index') }}">Teachers</a></li>
 
                         </ul>
                         <ul class="sub-menu" aria-expanded="false">
 
+                        </ul>
+                    </li>
+                @endcan
+
+                @can('manage users')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bxs-group"></i>
+                            <span>Students</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('students.create') }}">Add Student</a></li>
+                            <li><a href="{{ route('students.index') }}">Student List</a></li>
                         </ul>
                     </li>
                 @endcan
@@ -401,38 +415,6 @@
                         <li><a href="icons-materialdesign" key="t-material-design">@lang('translation.Material_Design')</a></li>
                         <li><a href="icons-dripicons" key="t-dripicons">@lang('translation.Dripicons')</a></li>
                         <li><a href="icons-fontawesome" key="t-font-awesome">@lang('translation.Font_awesome')</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-map"></i>
-                        <span key="t-maps">@lang('translation.Maps')</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="maps-google" key="t-g-maps">@lang('translation.Google_Maps')</a></li>
-                        <li><a href="maps-vector" key="t-v-maps">@lang('translation.Vector_Maps')</a></li>
-                        <li><a href="maps-leaflet" key="t-l-maps">@lang('translation.Leaflet_Maps')</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-share-alt"></i>
-                        <span key="t-multi-level">@lang('translation.Multi_Level')</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="javascript: void(0);" key="t-level-1-1">@lang('translation.Level_1.1')</a></li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow"
-                                key="t-level-1-2">@lang('translation.Level_1.2')</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="javascript: void(0);" key="t-level-2-1">@lang('translation.Level_2.1')</a>
-                                </li>
-                                <li><a href="javascript: void(0);" key="t-level-2-2">@lang('translation.Level_2.2')</a>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
 

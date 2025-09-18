@@ -10,18 +10,20 @@
                 <li class="menu-title" key="t-menu"><?php echo app('translator')->get('translation.Menu'); ?></li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="<?php echo e(route('root')); ?>" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards"><?php echo app('translator')->get('translation.Dashboards'); ?></span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="index" key="t-default"><?php echo app('translator')->get('translation.Default'); ?></a></li>
-                        <li><a href="dashboard-saas" key="t-saas"><?php echo app('translator')->get('translation.Saas'); ?></a></li>
-                        <li><a href="dashboard-crypto" key="t-crypto"><?php echo app('translator')->get('translation.Crypto'); ?></a></li>
-                        <li><a href="dashboard-blog" key="t-blog"><?php echo app('translator')->get('translation.Blog'); ?></a></li>
-                        <li><a href="dashboard-job"><?php echo app('translator')->get('translation.Jobs'); ?></a></li>
-                    </ul>
                 </li>
+
+
+                <li>
+                    <a href="<?php echo e(route('master.search-results')); ?>" class="waves-effect">
+                        <i class="bx bx-search-alt"></i>
+                        <span key="t-search">Search</span>
+                    </a>
+                </li>
+
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('manage users')): ?>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -32,12 +34,24 @@
                             <li><a href="<?php echo e(route('roles.index')); ?>">Roles</a></li>
                             <li><a href="<?php echo e(route('users.index')); ?>">Users</a></li>
                             <li><a href="<?php echo e(route('permissions.index')); ?>">Permissions</a></li>
-                            <li><a href="<?php echo e(route('students.index')); ?>">Students</a></li>
                             <li><a href="<?php echo e(route('teachers.index')); ?>">Teachers</a></li>
 
                         </ul>
                         <ul class="sub-menu" aria-expanded="false">
 
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('manage users')): ?>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bxs-group"></i>
+                            <span>Students</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="<?php echo e(route('students.create')); ?>">Add Student</a></li>
+                            <li><a href="<?php echo e(route('students.index')); ?>">Student List</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -401,38 +415,6 @@
                         <li><a href="icons-materialdesign" key="t-material-design"><?php echo app('translator')->get('translation.Material_Design'); ?></a></li>
                         <li><a href="icons-dripicons" key="t-dripicons"><?php echo app('translator')->get('translation.Dripicons'); ?></a></li>
                         <li><a href="icons-fontawesome" key="t-font-awesome"><?php echo app('translator')->get('translation.Font_awesome'); ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-map"></i>
-                        <span key="t-maps"><?php echo app('translator')->get('translation.Maps'); ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="maps-google" key="t-g-maps"><?php echo app('translator')->get('translation.Google_Maps'); ?></a></li>
-                        <li><a href="maps-vector" key="t-v-maps"><?php echo app('translator')->get('translation.Vector_Maps'); ?></a></li>
-                        <li><a href="maps-leaflet" key="t-l-maps"><?php echo app('translator')->get('translation.Leaflet_Maps'); ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-share-alt"></i>
-                        <span key="t-multi-level"><?php echo app('translator')->get('translation.Multi_Level'); ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="javascript: void(0);" key="t-level-1-1"><?php echo app('translator')->get('translation.Level_1.1'); ?></a></li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow"
-                                key="t-level-1-2"><?php echo app('translator')->get('translation.Level_1.2'); ?></a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="javascript: void(0);" key="t-level-2-1"><?php echo app('translator')->get('translation.Level_2.1'); ?></a>
-                                </li>
-                                <li><a href="javascript: void(0);" key="t-level-2-2"><?php echo app('translator')->get('translation.Level_2.2'); ?></a>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MasterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
@@ -30,14 +31,19 @@ Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
 Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
 
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-
 //Language Translation
 Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
-Route::prefix('management')->middleware(['role:Super-Admin'])->group(function () {
+Route::prefix('/admin')->middleware(['role:Super-Admin'])->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('permissions', PermissionController::class)->only(['index', 'store']);
-    Route::resource('students', StudentController::class);
+    Route::get('/search', [MasterController::class, 'search_results'])->name('master.search-results');
+    Route::post('/search', [MasterController::class, 'search'])->name('master.search');
+
+    Route::prefix('/students')->resource('students', StudentController::class);
     Route::resource('teachers', TeacherController::class);
+    Route::get('/view-profile', [UserController::class, 'view_profile'])->name('users.view-profile');
 });
+
+//for all other routes
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');

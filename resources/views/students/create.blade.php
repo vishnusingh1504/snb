@@ -13,7 +13,14 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Student Registration</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="card-title mb-4">Student Registration</h4>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <h4 class="card-title mb-4">Student ID: <span class="badge bg-primary">New</span></h4>
+                    </div>
+                </div>
 
                 <!-- 👇 Only ONE form wrapper -->
                 <form id="student-form" method="POST" action="{{ route('students.store') }}">
@@ -59,14 +66,25 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label for="student-id">Student ID</label>
-                                        <input type="text" class="form-control" name="student_id" id="student-id" value="{{ old('student_id') }}" required>
+                                        <label for="admission-session">Admission Session</label>
+                                        <select class="form-select" name="admission_session" id="admission-session">
+                                            <option value="" disabled selected>Select Session</option>
+                                            @foreach ($sessions as $session)
+                                                <option value="{{ $session->id }}" {{ old('admission_session') == $session->id ? 'selected' : '' }}>{{ $session->name }}</option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="admission-class">Admission Class</label>
-                                        <input type="text" class="form-control" name="admission_class" id="admission-class" value="{{ old('admission_class') }}">
+                                        <select class="form-select" name="admission_class" id="admission-class">
+                                            <option value="" disabled selected>Select Class</option>
+                                            @foreach ($classes as $class)
+                                                <option value="{{ $class->id }}" {{ old('admission_class') == $class->id ? 'selected' : '' }}>{{ $class->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +98,12 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="current-class">Current Class</label>
-                                        <input type="text" class="form-control" name="current_class" id="current-class" value="{{ old('current_class') }}">
+                                        <select class="form-select" name="current_class" id="current-class">
+                                            <option value="" disabled selected>Select Class</option>
+                                            @foreach ($classes as $class)
+                                                <option value="{{ $class->id }}" {{ old('current_class') == $class->id ? 'selected' : '' }}>{{ $class->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +163,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label for="mother-mobile">Mother Professio</label>
+                                        <label for="mother-mobile">Mother Profession</label>
                                         <input type="text" class="form-control" name="mother_occu" id="mother-occu" value="{{ old('mother_occu') }}">
                                     </div>
                                 </div>

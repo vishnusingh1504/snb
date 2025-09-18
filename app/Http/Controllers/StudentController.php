@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\User;
+use App\Models\Classes;
+use App\Models\AcademicSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+
 
 class StudentController extends Controller
 {
@@ -21,7 +24,9 @@ class StudentController extends Controller
 
     public function create()
     {
-        return view('students.create');
+        $classes = Classes::orderBy('id')->get();
+        $sessions = AcademicSession::orderByDesc('is_active')->get();
+        return view('students.create', compact('classes', 'sessions'));
     }
 
     public function store(Request $request)

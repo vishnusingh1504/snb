@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="index" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('build/images/logo.svg') }}" alt="" height="22">
+                        <img src="https://admin.snbic.in/uploads/logo.png" alt="" height="25">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" height="17">
+                        <img src="https://admin.snbic.in/uploads/logo1.png" alt="" height="50">
                     </span>
                 </a>
 
                 <a href="index" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('build/images/logo-light.svg') }}" alt="" height="22">
+                        <img src="https://admin.snbic.in/uploads/logo.png" alt="" height="25">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="19">
+                        <img src="https://admin.snbic.in/uploads/logo1.png" alt="" height="50">
                     </span>
                 </a>
             </div>
@@ -27,10 +27,11 @@
             </button>
 
            <!-- App Search-->
-           <form class="app-search d-none d-lg-block">
+           <form class="app-search d-none d-lg-block" accept="{{ route('master.search-results') }}" method="post" action="{{ route('master.search-results') }}">
+            @csrf
             <div class="position-relative">
-                <input type="text" class="form-control" id="searchBox" placeholder="@lang('translation.Search')">
-                <span class="bx bx-search-alt"></span>
+                <input type="text" class="form-control" id="searchBox" name="query" placeholder="Type / to Search...">
+                <span class ="bx bx-search-alt"></span>
             </div>
         </form>
 <!--
@@ -290,7 +291,7 @@
             </div>
         </div>
         <div class="dropdown d-none d-lg-inline-block ms-1">
-            <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+            <button type="button" class="btn header-item noti-icon waves-effect" id="fullscreenBtn" data-toggle="fullscreen">
                 <i class="bx bx-fullscreen"></i>
             </button>
         </div>
@@ -391,7 +392,7 @@
             </button>
             <div class="dropdown-menu dropdown-menu-end">
                 <!-- item-->
-                <a class="dropdown-item" href="contacts-profile"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">@lang('translation.Profile')</span></a>
+                <a class="dropdown-item" href="{{ route('users.view-profile') }}"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">@lang('translation.Profile')</span></a>
                 <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">@lang('translation.My_Wallet')</span></a>
                 <a class="dropdown-item d-block" href="#" data-bs-toggle="modal" data-bs-target=".change-password"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">@lang('translation.Settings')</span></a>
                 <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">@lang('translation.Lock_screen')</span></a>
@@ -460,11 +461,25 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true">
 
 @section('script')
 <script>
+setTimeout(function () {
     $(document).on('keydown', function (e) {
-    if (e.ctrlKey && e.code === 'Slash') { // Ctrl + /
-        e.preventDefault(); // Prevent default browser behavior
-        $('#searchBox').focus(); // Focus the search input
-    }
-});
+        if (e.code === 'Slash' && !$(':focus').is('input, textarea')) {
+            e.preventDefault();
+            $('#searchBox').focus();
+        }
+    });
+}, 500);
+
+$('#fullscreenBtn').on('click', function () {
+    const elem = document.documentElement; // Full page
+
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { // Safari
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { // IE11
+      elem.msRequestFullscreen();
+    }
+  });
     </script>
     @endsection

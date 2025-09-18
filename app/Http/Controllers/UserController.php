@@ -9,6 +9,10 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -18,6 +22,12 @@ class UserController extends Controller
         $users = User::with('roles')->get();
         return view('users.index', compact('users'));
     }
+
+    public function view_profile(User $user)
+    {
+        return view('users.view-profile', compact('user'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

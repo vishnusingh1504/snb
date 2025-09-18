@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();     // e.g., "Playgroup", "1st", "12th"
+            $table->string('numeric')->unique();
             $table->timestamps();
         });
     }
