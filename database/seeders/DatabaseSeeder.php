@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\CustomersSeeder;
 use Database\Seeders\RolesAndPermissionsSeeder;
 use Database\Seeders\ClassesSeeder;
+use Database\Seeders\AcademicSessionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CustomersSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
         $this->call(ClassesSeeder::class);
+        $this->call(AcademicSessionSeeder::class);
     }
 }

@@ -33,13 +33,14 @@ Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class
 
 //Language Translation
 Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
-Route::prefix('/admin')->middleware(['role:Super-Admin'])->group(function () {
+
+// Admin routes
+Route::prefix('/admin')->middleware(['auth', 'role:Super-Admin'])->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('permissions', PermissionController::class)->only(['index', 'store']);
     Route::get('/search', [MasterController::class, 'search_results'])->name('master.search-results');
     Route::post('/search', [MasterController::class, 'search'])->name('master.search');
-
     Route::prefix('/students')->resource('students', StudentController::class);
     Route::resource('teachers', TeacherController::class);
     Route::get('/view-profile', [UserController::class, 'view_profile'])->name('users.view-profile');

@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     public function index()
     {
         $teachers = User::whereHas('teacher')->with('teacher')->paginate(10);

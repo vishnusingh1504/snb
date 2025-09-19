@@ -10,6 +10,12 @@ class PermissionController extends Controller
     /**
      * Display a listing of the resource and a form to create new ones.
      */
+
+     public function __construct()
+    {
+        $this->middleware(['auth', 'role:Super-Admin']);
+    }
+
     public function index()
     {
         $permissions = Permission::all();

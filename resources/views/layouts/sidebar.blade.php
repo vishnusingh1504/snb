@@ -56,6 +56,8 @@
                     </li>
                 @endcan
 
+                <li class="menu-title" key="t-menu">Reports</li>
+
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <span class="badge rounded-pill bg-danger float-end" key="t-hot">@lang('translation.hot')</span>

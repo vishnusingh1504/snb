@@ -8,6 +8,12 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role:Super-Admin']);
+    }
+
     public function index()
     {
         $roles = Role::all();
