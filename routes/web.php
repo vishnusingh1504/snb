@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
@@ -39,11 +40,17 @@ Route::prefix('/admin')->middleware(['auth', 'role:Super-Admin'])->group(functio
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('permissions', PermissionController::class)->only(['index', 'store']);
+
     Route::get('/search', [MasterController::class, 'search_results'])->name('master.search-results');
     Route::post('/search', [MasterController::class, 'search'])->name('master.search');
+
     Route::prefix('/students')->resource('students', StudentController::class);
+    Route::post('/students/preview', [StudentController::class, 'preview'])->name('students.preview');
+
     Route::resource('teachers', TeacherController::class);
     Route::get('/view-profile', [UserController::class, 'view_profile'])->name('users.view-profile');
+
+    Route::post('/pdf/generate', [PDFController::class, 'generateFromHtml'])->name('pdf.generateGenericPDF');
 });
 
 //for all other routes

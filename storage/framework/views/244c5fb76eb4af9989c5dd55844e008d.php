@@ -55,8 +55,17 @@
                         </ul>
                     </li>
                 <?php endif; ?>
+                <!-- For Employees -->
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('manage employees')): ?>
+                    <li class="menu-title" key="t-menu">Employees</li>
 
-                <li class="menu-title" key="t-menu">Reports</li>
+                <?php endif; ?>
+
+                <!-- For Reports -->
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view reports')): ?>
+                    <li class="menu-title" key="t-menu">Reports</li>
+
+                <?php endif; ?>
 
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">

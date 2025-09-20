@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Classes;
 use App\Models\AcademicSession;
 use Illuminate\Http\Request;
+use App\Http\Requests\StudentRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -133,6 +134,13 @@ class StudentController extends Controller
 
         return redirect()->route('students.index')->with('success', 'Student updated successfully');
     }
+
+    public function preview (StudentRequest $request)
+    {
+        $validatedData = $request->validated();
+        return view('students.preview', ['data' => $validatedData])->render();
+    }
+
 
     public function destroy(Student $student)
     {

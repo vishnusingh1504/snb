@@ -55,8 +55,17 @@
                         </ul>
                     </li>
                 @endcan
+                <!-- For Employees -->
+                @can('manage employees')
+                    <li class="menu-title" key="t-menu">Employees</li>
 
-                <li class="menu-title" key="t-menu">Reports</li>
+                @endcan
+
+                <!-- For Reports -->
+                @can('view reports')
+                    <li class="menu-title" key="t-menu">Reports</li>
+
+                @endcan
 
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
