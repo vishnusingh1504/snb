@@ -368,11 +368,21 @@
                                     <div class="mb-3">
                                         <label for="board-name">Board Name</label>
                                         <select class="form-select" name="board_name" id="board-name">
-                                            <option value="" disabled selected>Select Board</option>
-                                            <option value="cbse" {{ old('board_name') == 'cbse' ? 'selected' : '' }}>CBSE</option>
-                                            <option value="icse" {{ old('board_name') == 'icse' ? 'selected' : '' }}>ICSE</option>
-                                            <option value="up_board" {{ old('board_name') == 'up_board' ? 'selected' : '' }}>UP Board</option>
-                                            <option value="other" {{ old('board_name') == 'other' ? 'selected' : '' }}>Other</option>
+                                            {{-- Loop through each group (e.g., "National Boards", "State Boards") --}}
+                                            @foreach($school_boards as $groupName => $boards)
+                                                @if ($loop->first)
+                                                    @foreach($boards as $board)
+                                                        <option value="{{ $board['value'] }}" {{ old('board_name') == $board['value'] ? 'selected' : ''  }}>{{ $board['text'] }}</option>
+                                                    @endforeach
+                                                @else
+                                                    <optgroup label="{{ $groupName }}">
+                                                        @foreach($boards as $board)
+                                                            <option value="{{ $board['value'] }}" {{ old('board_name') == $board['value'] ? 'selected' : ''  }}>{{ $board['text'] }}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                @endif
+
+                                        @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -384,7 +394,6 @@
                                             <option value="Mathematics" {{ old('stream') == 'Mathematics' ? 'selected' : '' }}>Mathematics</option>
                                             <option value="Biology" {{ old('stream') == 'Biology' ? 'selected' : '' }}>Biology</option>
                                             <option value="Homescience" {{ old('stream') == 'Homescience' ? 'selected' : '' }}>Home Science</option>
-                                            <option value="None" {{ old('stream') == '' ? 'selected' : '' }}>None</option>
                                         </select>
                                     </div>
                                 </div>
@@ -395,13 +404,9 @@
                                         <label for="religion">Religion</label>
                                         <select class="form-select" name="religion" id="religion">
                                             <option value="" disabled selected>Select Religion</option>
-                                            <option value="hindu" {{ old('religion') == 'hindu' ? 'selected' : '' }}>Hindu</option>
-                                            <option value="muslim" {{ old('religion') == 'muslim' ? 'selected' : '' }}>Muslim</option>
-                                            <option value="christian" {{ old('religion') == 'christian' ? 'selected' : '' }}>Christian</option>
-                                            <option value="sikh" {{ old('religion') == 'sikh' ? 'selected' : '' }}>Sikh</option>
-                                            <option value="buddhist" {{ old('religion') == 'buddhist' ? 'selected' : '' }}>Buddhist</option>
-                                            <option value="jain" {{ old('religion') == 'jain' ? 'selected' : '' }}>Jain</option>
-                                            <option value="other" {{ old('religion') == 'other' ? 'selected' : '' }}>Other</option>
+                                            @foreach ($castees['religions'] as $religion)
+                                                <option value="{{ $religion }}" {{ old('religion') == $religion ? 'selected' : '' }}> {{ $religion }} </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -410,11 +415,9 @@
                                         <label for="category">Category</label>
                                         <select class="form-select" name="category" id="category">
                                             <option value="" disabled selected>Select Category</option>
-                                            <option value="general" {{ old('category') == 'general' ? 'selected' : '' }}>General</option>
-                                            <option value="obc" {{ old('category') == 'obc' ? 'selected' : '' }}>OBC</option>
-                                            <option value="sc" {{ old('category') == 'sc' ? 'selected' : '' }}>SC</option>
-                                            <option value="st" {{ old('category') == 'st' ? 'selected' : '' }}>ST</option>
-                                            <option value="EWS" {{ old('category') == 'EWS' ? 'selected' : '' }}>EWS</option>
+                                            @foreach ($castees['categorys'] as $category)
+                                                <option value="{{ $category }}" {{ old('category') == $category ? 'selected' : '' }}> {{ $category }} </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -423,23 +426,9 @@
                                         <label for="Caste">Caste</label>
                                         <select class="form-select" name="caste" id="caste">
                                             <option value="" disabled selected>Select Caste</option>
-                                            <option value="Jat" {{ old('caste') == 'Jat' ? 'selected' : '' }}>Jat</option>
-                                            <option value="Yadav" {{ old('caste') == 'Yadav' ? 'selected' : '' }}>Yadav</option>
-                                            <option value="Gujjar" {{ old('caste') == 'Gujjar' ? 'selected' : '' }}>Gujjar</option>
-                                            <option value="Brahmin" {{ old('caste') == 'Brahmin' ? 'selected' : '' }}>Brahmin</option>
-                                            <option value="Rajput" {{ old('caste') == 'Rajput' ? 'selected' : '' }}>Rajput</option>
-                                            <option value="Thakur" {{ old('caste') == 'Thakur' ? 'selected' : '' }}>Thakur</option>
-                                            <option value="Kumhar" {{ old('caste') == 'Kumhar' ? 'selected' : '' }}>Kumhar</option>
-                                            <option value="Kashyap" {{ old('caste') == 'Kashyap' ? 'selected' : '' }}>Kashyap</option>
-                                            <option value="Jatav" {{ old('caste') == 'Jatav' ? 'selected' : '' }}>Jatav</option>
-                                            <option value="Valmiki" {{ old('caste') == 'Valmiki' ? 'selected' : '' }}>Valmiki</option>
-                                            <option value="Nai" {{ old('caste') == 'Nai' ? 'selected' : '' }}>Nai</option>
-                                            <option value="Bania" {{ old('caste') == 'Bania' ? 'selected' : '' }}>Bania</option>
-                                            <option value="Kumawat" {{ old('caste') == 'Kumawat' ? 'selected' : '' }}>Kumawat</option>
-                                            <option value="Saini" {{ old('caste') == 'Saini' ? 'selected' : '' }}>Saini</option>
-                                            <option value="Muslim" {{ old('caste') == 'Muslim' ? 'selected' : '' }}>Muslim</option>
-                                            <option value="Sikh" {{ old('caste') == 'Sikh' ? 'selected' : '' }}>Sikh</option>
-                                            <option value="Other" {{ old('caste') == 'Other' ? 'selected' : '' }}>Other</option>
+                                            @foreach ($castees['castes'] as $caste)
+                                                <option value="{{ $caste }}" {{ old('caste') == $caste ? 'selected' : '' }}> {{ $caste }} </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -633,6 +622,7 @@
 <script src="{{ URL::asset('build/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
 <script src="{{ URL::asset('build/js/pages/hindi-input.js') }}"></script>
 
+
 <script>
     $("#vertical-example").steps({
         headerTag: "h3",
@@ -677,9 +667,40 @@
         }
     });
 
-    $('#pincode').on('blur', function() {
-    var pincode = $(this).val().trim();
-    if (pincode.length === 6) {
+// Print functionality
+$(document).on('click', '#printButton', function () {
+        const printContent = document.getElementById('previewContent').innerHTML;
+        const printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Print Preview</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                    </style>
+                </head>
+                <body onload="window.print(); window.close();">
+                    ${printContent}
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+});
+
+// Download functionality
+$(document).on('click', '#downloadButton', function () {
+        const content = document.getElementById('previewContent').innerHTML;
+        const blob = new Blob([content], { type: 'text/html' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'preview.html';
+        link.click();
+});
+
+$('#pincode').on('blur', function() {
+        var pincode = $(this).val().trim();
+        if (pincode.length === 6) {
         fetch(`https://api.postalpincode.in/pincode/${pincode}`)
             .then(response => response.json())
             .then(data => {
@@ -735,7 +756,7 @@ function previewImage(event, previewId) {
             reader.readAsDataURL(input.files[0]);
         } else {
             // Reset to the default "No Image" placeholder if no file is selected
-            preview.src = "{{ asset('image/1689045779.png') }}";
+            preview.src = "{{ asset('images/1689045779.png') }}";
         }
     }
 </script>

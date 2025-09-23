@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StudentRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class StudentController extends Controller
@@ -33,21 +34,19 @@ class StudentController extends Controller
     {
         $classes = Classes::orderBy('id')->get();
         $sessions = AcademicSession::orderByDesc('is_active')->get();
-        return view('students.create', compact('classes', 'sessions'));
+        $school_boards = Storage::get('utils/school_boards.json');
+        $school_boards = json_decode($school_boards, true);
+        $castees = Storage::get('utils/castes.json');
+        $castees = json_decode($castees, true);
+        return view('students.create', compact('classes', 'sessions', 'school_boards', 'castees'));
     }
 
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'dob' => 'nullable|date',
-            'image_location' => 'nullable|image|max:2048',
-        ]);
-        $imagePath = null;
+        $request->validated();
+        [$studentImagePath, $fatherImagePath, $motherImagePath] = [null, null, null];
         if ($request->hasFile('image_location')) {
-            $imagePath = $request->file('image_location')->store('students', 'public');
+            $studentimagePath = $request->file('student_photo')->store('students', 'public');
         }
 
         // Create User
@@ -56,7 +55,7 @@ class StudentController extends Controller
             'email' => $request->email,
             'dob' => $request->dob,
             'avatar' => $imagePath,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make(Str::random(12)), // Random password
         ]);
         $user->assignRole($request->roles);
 

@@ -14,35 +14,59 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
+            // Custom student ID (e.g., SNB10001)
             $table->string('student_id')->unique();
-            $table->string('pen_number');
-            $table->string('adhar_no');
+
+            // Personal Details
+            $table->string('name');
+            $table->string('name_hindi')->nullable();
+            $table->string('adhar_no', 12);
+            $table->string('pen_number', 10);
+            $table->enum('gender', ['male', 'female', 'others']);
             $table->date('dob');
-            $table->string('caste');
-            $table->string('religion');
-            $table->string('admission_class');
+            $table->string('email')->unique();
+            $table->string('transport_route')->nullable();
+
+            // Parent Details
+            $table->string('father_name')->nullable();
+            $table->string('father_name_hindi')->nullable();
+            $table->string('mother_name')->nullable();
+            $table->string('mother_name_hindi')->nullable();
+            $table->string('father_adhar', 12)->nullable();
+            $table->string('mother_adhar', 12)->nullable();
+            $table->string('father_mobile', 10)->nullable();
+            $table->string('mother_mobile', 10)->nullable();
+            $table->string('father_occupation')->nullable();
+            $table->string('mother_occupation')->nullable();
+
+            // Academic Details
+            $table->integer('admission_session');
+            $table->integer('admission_class');
             $table->date('admission_date');
-            $table->string('stream'); // Home Science, Maths, Bio
-            $table->string('current_class');
-            $table->string('prev_school');
-            $table->string('mobile_no');
-            $table->string('father_name');
-            $table->string('father_adhar');
-            $table->string('father_occu');
-            $table->string('father_mobile');
-            $table->string('mother_name');
-            $table->string('mother_adhar');
-            $table->string('mother_occu');
-            $table->string('mother_mobile');
-            $table->text('address');
-            $table->string('admission_session');
-            $table->string('current_session');
-            $table->string('image_location')->nullable();
-            $table->enum('status', ['Active', 'Transffered']);
+            $table->string('active_session');
+
+            $table->string('stream', 55)->nullable();
+
+            $table->string('religion', 55)->nullable();
+            $table->string('category', 45)->nullable();
+            $table->string('caste', 60)->nullable();
+
+            // Address stored as JSON
+            $table->json('address')->nullable();
+
+            // Bank Details
+            $table->string('bank_account_number');
+            $table->string('ifsc_code', 11);
+
+            // Previous School/Academic Details
+            $table->json('previous_academic_details')->nullable();
+
+            // Photos
+            $table->json('images')->nullable();
+
+            $table->enum('status', ['Active', 'Transffered', 'Passed Out', 'Inactive'])->default('Active');
             $table->string('last_updated_by')->nullable();
-            $table->timestamp('last_modified_on')->nullable();
             $table->string('created_by')->nullable();
-            $table->timestamp('created_on')->nullable();
 
             $table->timestamps();
         });

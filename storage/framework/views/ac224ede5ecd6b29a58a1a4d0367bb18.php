@@ -364,11 +364,21 @@
                                     <div class="mb-3">
                                         <label for="board-name">Board Name</label>
                                         <select class="form-select" name="board_name" id="board-name">
-                                            <option value="" disabled selected>Select Board</option>
-                                            <option value="cbse" <?php echo e(old('board_name') == 'cbse' ? 'selected' : ''); ?>>CBSE</option>
-                                            <option value="icse" <?php echo e(old('board_name') == 'icse' ? 'selected' : ''); ?>>ICSE</option>
-                                            <option value="up_board" <?php echo e(old('board_name') == 'up_board' ? 'selected' : ''); ?>>UP Board</option>
-                                            <option value="other" <?php echo e(old('board_name') == 'other' ? 'selected' : ''); ?>>Other</option>
+                                            
+                                            <?php $__currentLoopData = $school_boards; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $groupName => $boards): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($loop->first): ?>
+                                                    <?php $__currentLoopData = $boards; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $board): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($board['value']); ?>" <?php echo e(old('board_name') == $board['value'] ? 'selected' : ''); ?>><?php echo e($board['text']); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php else: ?>
+                                                    <optgroup label="<?php echo e($groupName); ?>">
+                                                        <?php $__currentLoopData = $boards; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $board): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($board['value']); ?>" <?php echo e(old('board_name') == $board['value'] ? 'selected' : ''); ?>><?php echo e($board['text']); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </optgroup>
+                                                <?php endif; ?>
+
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
                                 </div>
@@ -380,7 +390,6 @@
                                             <option value="Mathematics" <?php echo e(old('stream') == 'Mathematics' ? 'selected' : ''); ?>>Mathematics</option>
                                             <option value="Biology" <?php echo e(old('stream') == 'Biology' ? 'selected' : ''); ?>>Biology</option>
                                             <option value="Homescience" <?php echo e(old('stream') == 'Homescience' ? 'selected' : ''); ?>>Home Science</option>
-                                            <option value="None" <?php echo e(old('stream') == '' ? 'selected' : ''); ?>>None</option>
                                         </select>
                                     </div>
                                 </div>
@@ -391,13 +400,9 @@
                                         <label for="religion">Religion</label>
                                         <select class="form-select" name="religion" id="religion">
                                             <option value="" disabled selected>Select Religion</option>
-                                            <option value="hindu" <?php echo e(old('religion') == 'hindu' ? 'selected' : ''); ?>>Hindu</option>
-                                            <option value="muslim" <?php echo e(old('religion') == 'muslim' ? 'selected' : ''); ?>>Muslim</option>
-                                            <option value="christian" <?php echo e(old('religion') == 'christian' ? 'selected' : ''); ?>>Christian</option>
-                                            <option value="sikh" <?php echo e(old('religion') == 'sikh' ? 'selected' : ''); ?>>Sikh</option>
-                                            <option value="buddhist" <?php echo e(old('religion') == 'buddhist' ? 'selected' : ''); ?>>Buddhist</option>
-                                            <option value="jain" <?php echo e(old('religion') == 'jain' ? 'selected' : ''); ?>>Jain</option>
-                                            <option value="other" <?php echo e(old('religion') == 'other' ? 'selected' : ''); ?>>Other</option>
+                                            <?php $__currentLoopData = $castees['religions']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $religion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($religion); ?>" <?php echo e(old('religion') == $religion ? 'selected' : ''); ?>> <?php echo e($religion); ?> </option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
                                 </div>
@@ -406,11 +411,9 @@
                                         <label for="category">Category</label>
                                         <select class="form-select" name="category" id="category">
                                             <option value="" disabled selected>Select Category</option>
-                                            <option value="general" <?php echo e(old('category') == 'general' ? 'selected' : ''); ?>>General</option>
-                                            <option value="obc" <?php echo e(old('category') == 'obc' ? 'selected' : ''); ?>>OBC</option>
-                                            <option value="sc" <?php echo e(old('category') == 'sc' ? 'selected' : ''); ?>>SC</option>
-                                            <option value="st" <?php echo e(old('category') == 'st' ? 'selected' : ''); ?>>ST</option>
-                                            <option value="EWS" <?php echo e(old('category') == 'EWS' ? 'selected' : ''); ?>>EWS</option>
+                                            <?php $__currentLoopData = $castees['categorys']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($category); ?>" <?php echo e(old('category') == $category ? 'selected' : ''); ?>> <?php echo e($category); ?> </option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
                                 </div>
@@ -419,23 +422,9 @@
                                         <label for="Caste">Caste</label>
                                         <select class="form-select" name="caste" id="caste">
                                             <option value="" disabled selected>Select Caste</option>
-                                            <option value="Jat" <?php echo e(old('caste') == 'Jat' ? 'selected' : ''); ?>>Jat</option>
-                                            <option value="Yadav" <?php echo e(old('caste') == 'Yadav' ? 'selected' : ''); ?>>Yadav</option>
-                                            <option value="Gujjar" <?php echo e(old('caste') == 'Gujjar' ? 'selected' : ''); ?>>Gujjar</option>
-                                            <option value="Brahmin" <?php echo e(old('caste') == 'Brahmin' ? 'selected' : ''); ?>>Brahmin</option>
-                                            <option value="Rajput" <?php echo e(old('caste') == 'Rajput' ? 'selected' : ''); ?>>Rajput</option>
-                                            <option value="Thakur" <?php echo e(old('caste') == 'Thakur' ? 'selected' : ''); ?>>Thakur</option>
-                                            <option value="Kumhar" <?php echo e(old('caste') == 'Kumhar' ? 'selected' : ''); ?>>Kumhar</option>
-                                            <option value="Kashyap" <?php echo e(old('caste') == 'Kashyap' ? 'selected' : ''); ?>>Kashyap</option>
-                                            <option value="Jatav" <?php echo e(old('caste') == 'Jatav' ? 'selected' : ''); ?>>Jatav</option>
-                                            <option value="Valmiki" <?php echo e(old('caste') == 'Valmiki' ? 'selected' : ''); ?>>Valmiki</option>
-                                            <option value="Nai" <?php echo e(old('caste') == 'Nai' ? 'selected' : ''); ?>>Nai</option>
-                                            <option value="Bania" <?php echo e(old('caste') == 'Bania' ? 'selected' : ''); ?>>Bania</option>
-                                            <option value="Kumawat" <?php echo e(old('caste') == 'Kumawat' ? 'selected' : ''); ?>>Kumawat</option>
-                                            <option value="Saini" <?php echo e(old('caste') == 'Saini' ? 'selected' : ''); ?>>Saini</option>
-                                            <option value="Muslim" <?php echo e(old('caste') == 'Muslim' ? 'selected' : ''); ?>>Muslim</option>
-                                            <option value="Sikh" <?php echo e(old('caste') == 'Sikh' ? 'selected' : ''); ?>>Sikh</option>
-                                            <option value="Other" <?php echo e(old('caste') == 'Other' ? 'selected' : ''); ?>>Other</option>
+                                            <?php $__currentLoopData = $castees['castes']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $caste): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($caste); ?>" <?php echo e(old('caste') == $caste ? 'selected' : ''); ?>> <?php echo e($caste); ?> </option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
                                 </div>
@@ -629,6 +618,7 @@
 <script src="<?php echo e(URL::asset('build/libs/jquery-steps/build/jquery.steps.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('build/js/pages/hindi-input.js')); ?>"></script>
 
+
 <script>
     $("#vertical-example").steps({
         headerTag: "h3",
@@ -673,9 +663,40 @@
         }
     });
 
-    $('#pincode').on('blur', function() {
-    var pincode = $(this).val().trim();
-    if (pincode.length === 6) {
+// Print functionality
+$(document).on('click', '#printButton', function () {
+        const printContent = document.getElementById('previewContent').innerHTML;
+        const printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Print Preview</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                    </style>
+                </head>
+                <body onload="window.print(); window.close();">
+                    ${printContent}
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+});
+
+// Download functionality
+$(document).on('click', '#downloadButton', function () {
+        const content = document.getElementById('previewContent').innerHTML;
+        const blob = new Blob([content], { type: 'text/html' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'preview.html';
+        link.click();
+});
+
+$('#pincode').on('blur', function() {
+        var pincode = $(this).val().trim();
+        if (pincode.length === 6) {
         fetch(`https://api.postalpincode.in/pincode/${pincode}`)
             .then(response => response.json())
             .then(data => {
@@ -731,7 +752,7 @@ function previewImage(event, previewId) {
             reader.readAsDataURL(input.files[0]);
         } else {
             // Reset to the default "No Image" placeholder if no file is selected
-            preview.src = "<?php echo e(asset('image/1689045779.png')); ?>";
+            preview.src = "<?php echo e(asset('images/1689045779.png')); ?>";
         }
     }
 </script>
